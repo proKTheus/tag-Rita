@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+
+  <!-- =========================================
+       CONFIGURAÇÕES — EDITE SOMENTE AQUI
+       ========================================= -->
+  <script>
+    const CONFIG = {
+      // Nome do arquivo da foto.
+      foto: "rita.jpeg",
+
+      // Posição da foto: valores entre 0 e 100.
+      // 50 = centralizado.
+      // Aumentar posX desloca a foto para a esquerda.
+      // Aumentar posY desloca a foto para cima.
+      posX: 50,
+      posY: 50,
+
+      // 1 = normal; 1.2 = ampliação de 20%.
+      zoom: 0.5,
+
+      nomeCachorro: "a Rita",
+			cordaPata: "#FF69B4",
+														// #3498db  --> Azul
+														// #FF69B4  --> Rosa
+      nomeTutor: "Gleciane Oliveira Galvão",
+
+      descricao: "Pitbull · Fêmea · 1 ano",
+
+      // Informe os números completos, incluindo país e DDD.
+      numeroWhatsapp: "+55 44 9734-0073",
+      numeroCelular: "+55 44 9734-0073",
+
+      // Substitua pelo link do Instagram.
+      // Deixe "" caso queira esconder o botão.
+      linkInstagram: "https://www.instagram.com/glecianegalvao/",
+
+      endereco: "Ouro Verde 2 · Sarandi – PR",
+
+      // Texto exibido abaixo de "Me encontrou sozinho?".
+      recado:
+        "Minha família pode estar me procurando. " +
+        "Entre em contato para me ajudar a voltar para casa!"
+    };
+  </script>
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta name="theme-color" content="#f5f1e8">
+
+  <title>Identificação do animal</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    body {
+      margin: 0;
+      background: #f5f1e8;
+      color: #283c31;
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+    }
+    
+    .patinha {
+  		width: 30px;
+  		height: 30px;
+  		vertical-align: middle;
+  		/* Cor da patinha. */
+  		/*fill: #3498db; 	/* Azul */
+			fill: #FF69B4;  	/* Rosa */
+  		
+		}
+
+    .pagina {
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 24px 20px;
+      text-align: center;
+    }
+
+    /* Mantém a área da foto quadrada. */
+    .moldura-foto {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      border-radius: 24px;
+      margin-bottom: 20px;
+      background: #e1e4da;
+    }
+
+    .foto-cachorro {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 32px;
+      line-height: 1.2;
+      overflow-wrap: anywhere;
+    }
+
+    .descricao {
+      margin: 0 0 22px;
+      color: #59645b;
+      font-size: 16px;
+    }
+
+    /* Aviso com recado, responsável e endereço. */
+    .aviso {
+      padding: 20px;
+      margin: 20px 0 22px;
+      background: #e4ebdf;
+      border-radius: 16px;
+      overflow-wrap: anywhere;
+    }
+
+    .aviso h2 {
+      margin: 0 0 8px;
+      font-size: 20px;
+      line-height: 1.3;
+    }
+
+    .aviso p {
+      margin: 0;
+      font-size: 15px;
+    }
+
+    .dados-responsavel {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid #c5d2bf;
+      text-align: left;
+    }
+
+    .dados-responsavel p {
+      margin: 0 0 12px;
+    }
+
+    .dados-responsavel p:last-child {
+      margin-bottom: 0;
+    }
+
+    .rotulo {
+      display: block;
+      margin-bottom: 3px;
+      color: #59645b;
+      font-size: 13px;
+    }
+
+    /* Botões em uma única coluna. */
+    .contatos {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .botao {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 100%;
+      min-height: 56px;
+      padding: 16px;
+
+      border: 2px solid transparent;
+      border-radius: 14px;
+
+      font-size: 16px;
+      font-weight: bold;
+      line-height: 1.4;
+      text-decoration: none;
+
+      transition: background-color 0.2s;
+    }
+
+    .whatsapp {
+      background: #286448;
+      color: white;
+    }
+
+    .whatsapp:hover {
+      background: #1d4d36;
+    }
+
+    .telefone {
+      background: white;
+      color: #286448;
+      border-color: #286448;
+    }
+
+    .telefone:hover {
+      background: #e4ebdf;
+    }
+
+    .instagram {
+      background: #83516b;
+      color: white;
+    }
+
+    .instagram:hover {
+      background: #693e55;
+    }
+
+    .botao:focus-visible {
+      outline: 3px solid #c66a25;
+      outline-offset: 4px;
+    }
+
+    footer {
+      margin-top: 24px;
+      color: #59645b;
+      font-size: 13px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .botao {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="pagina">
+
+    <!-- Foto do cachorro. -->
+    <div class="moldura-foto">
+      <img
+        id="foto"
+        class="foto-cachorro"
+        alt="Foto do animal"
+      >
+    </div>
+
+    <!-- Nome e descrição. -->
+    <h1>
+  Eu sou <span id="nome-cachorro"></span>!
+
+  <svg class="patinha" viewBox="0 0 24 24" aria-hidden="true">
+    <ellipse cx="5" cy="9" rx="2" ry="3"
+             transform="rotate(-25 5 9)" />
+
+    <ellipse cx="9.5" cy="5" rx="2" ry="3" />
+
+    <ellipse cx="14.5" cy="5" rx="2" ry="3" />
+
+    <ellipse cx="19" cy="9" rx="2" ry="3"
+             transform="rotate(25 19 9)" />
+
+    <path d="
+      M12 10
+      C9 10 8 13 6 15
+      C3 18 5 22 8 21
+      C11 20 13 20 16 21
+      C19 22 21 18 18 15
+      C16 13 15 10 12 10
+      Z
+    " />
+  </svg>
+</h1>
+
+    <p id="descricao" class="descricao"></p>
+
+    <!-- Recado, responsável e endereço no mesmo bloco. -->
+    <section class="aviso" aria-labelledby="titulo-aviso">
+      <h2 id="titulo-aviso">Me encontrou sozinho?</h2>
+
+      <p id="campo-recado">
+        <span id="recado"></span>
+      </p>
+
+      <div class="dados-responsavel">
+        <p>
+          <span class="rotulo">Meu responsável</span>
+          <strong id="nome-tutor"></strong>
+        </p>
+
+        <p id="campo-endereco">
+          <span class="rotulo">Onde moro</span>
+          <span id="endereco"></span>
+        </p>
+      </div>
+    </section>
+
+    <!-- Botões de contato. -->
+    <nav class="contatos" aria-label="Contatos do responsável">
+
+      <a
+        id="botao-whatsapp"
+        class="botao whatsapp"
+        hidden
+      >
+        Falar pelo WhatsApp
+      </a>
+
+      <a
+        id="botao-telefone"
+        class="botao telefone"
+        hidden
+      >
+        Fazer uma ligação
+      </a>
+
+      <a
+        id="botao-instagram"
+        class="botao instagram"
+        hidden
+      >
+        Acessar Instagram
+      </a>
+
+    </nav>
+
+    <footer>
+      Obrigado por me ajudar a voltar para casa! ♡
+    </footer>
+
+  </main>
+
+  <!-- =========================================
+       FUNCIONAMENTO AUTOMÁTICO DA PÁGINA
+       ========================================= -->
+  <script>
+    function elemento(id) {
+      return document.getElementById(id);
+    }
+
+    // Remove tudo que não for número.
+    function somenteNumeros(numero) {
+      return String(numero).replace(/\D/g, "");
+    }
+
+    // Configura o endereço e a visibilidade dos botões.
+    function configurarBotao(id, link) {
+      const botao = elemento(id);
+
+      if (link) {
+        botao.href = link;
+        botao.hidden = false;
+      } else {
+        botao.removeAttribute("href");
+        botao.hidden = true;
+      }
+    }
+
+    // Limita as posições ao intervalo de 0 a 100.
+    function limitarPosicao(valor) {
+      const numero = Number(valor);
+
+      if (!Number.isFinite(numero)) {
+        return 50;
+      }
+
+      return Math.min(100, Math.max(0, numero));
+    }
+
+    // Atualiza o título da aba.
+    document.title = CONFIG.nomeCachorro + " — Identificação";
+
+    // Preenche os textos.
+    elemento("nome-cachorro").textContent = CONFIG.nomeCachorro;
+    document.querySelector(".patinha").style.fill = CONFIG.cordaPata;
+    elemento("nome-tutor").textContent = CONFIG.nomeTutor;
+    elemento("descricao").textContent = CONFIG.descricao;
+    elemento("endereco").textContent = CONFIG.endereco;
+    elemento("recado").textContent = CONFIG.recado;
+
+    // Oculta os campos opcionais quando estiverem vazios.
+    elemento("descricao").hidden = !CONFIG.descricao.trim();
+    elemento("campo-endereco").hidden = !CONFIG.endereco.trim();
+    elemento("campo-recado").hidden = !CONFIG.recado.trim();
+
+    // Configura a foto.
+    const foto = elemento("foto");
+
+    const posX = limitarPosicao(CONFIG.posX);
+    const posY = limitarPosicao(CONFIG.posY);
+
+    const zoomInformado = Number(CONFIG.zoom);
+
+    const zoom = Number.isFinite(zoomInformado)
+      ? Math.max(1, zoomInformado)
+      : 1;
+
+    foto.src = CONFIG.foto;
+    foto.alt = "Foto de " + CONFIG.nomeCachorro;
+
+    foto.style.objectPosition = `${posX}% ${posY}%`;
+    foto.style.transformOrigin = `${posX}% ${posY}%`;
+    foto.style.transform = `scale(${zoom})`;
+
+    // Monta o link do WhatsApp.
+    const whatsapp = somenteNumeros(CONFIG.numeroWhatsapp);
+
+    // O nome na mensagem acompanha automaticamente o CONFIG.
+    const mensagem =
+      `Olá! Encontrei ${CONFIG.nomeCachorro} e estou entrando ` +
+      `em contato pela identificação da coleira.`;
+
+    const linkWhatsapp = whatsapp
+      ? `https://wa.me/${whatsapp}?text=${encodeURIComponent(mensagem)}`
+      : "";
+
+    configurarBotao("botao-whatsapp", linkWhatsapp);
+
+    // Monta o link de ligação.
+    const celular = somenteNumeros(CONFIG.numeroCelular);
+
+    const linkTelefone = celular
+      ? `tel:+${celular}`
+      : "";
+
+    configurarBotao("botao-telefone", linkTelefone);
+
+    // Configura o Instagram.
+    configurarBotao(
+      "botao-instagram",
+      CONFIG.linkInstagram.trim()
+    );
+  </script>
+</body>
+</html>
